@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Envirolyte Brasil — Diagnóstico Operacional</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green-900: #0a1f0f;
+    --green-800: #0f2d18;
+    --green-700: #1a4a28;
+    --green-600: #006644;
+    --green-500: #00a86b;
+    --green-400: #4caf50;
+    --green-300: #81c784;
+    --green-100: #e8f5e9;
+    --teal:       #26a69a;
+    --amber:      #f9a825;
+    --amber-light:#fff8e1;
+    --white:      #ffffff;
+    --text-main:  #1b3a28;
+    --text-muted: #4a7a5a;
+    --border:     #c8e6c9;
+    --bg:         #f0f4f0;
+    --radius:     10px;
+    --font-serif: 'DM Serif Display', Georgia, serif;
+    --font-mono:  'DM Mono', monospace;
+    --font-sans:  'Lato', Arial, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(0,168,107,.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(38,166,154,.06) 0%, transparent 60%);
+    font-family: var(--font-sans);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--green-900);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(0,168,107,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-accent {
+    display: flex;
+    height: 3px;
+  }
+  .header-accent span:nth-child(1){ flex:1; background:var(--green-500); }
+  .header-accent span:nth-child(2){ flex:1; background:var(--green-600); }
+  .header-accent span:nth-child(3){ flex:1; background:var(--green-700); }
+  .header-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 28px 24px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .header-brand p.eyebrow {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 4px;
+  }
+  .header-brand h1 {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .header-brand p.sub {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-300);
+    margin-top: 3px;
+  }
+  .mode-badge {
+    background: rgba(0,168,107,.15);
+    border: 1px solid rgba(0,168,107,.35);
+    border-radius: 6px;
+    padding: 8px 16px;
+    text-align: right;
+  }
+  .mode-badge p.label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green-400);
+    margin-bottom: 2px;
+  }
+  .mode-badge p.value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--white);
+  }
+  .header-strip {
+    background: rgba(0,168,107,.12);
+    border-top: 1px solid rgba(0,168,107,.2);
+    padding: 10px 24px;
+    text-align: center;
+  }
+  .header-strip p {
+    font-size: 12px;
+    color: var(--green-300);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .header-strip p strong { color: var(--white); }
+
+  /* ── CONTAINER ── */
+  .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 28px 0 14px;
+  }
+  .section-title .left {
+    border-left: 3px solid var(--green-500);
+    padding-left: 12px;
+  }
+  .section-title .left .num {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 2px;
+  }
+  .section-title .left h2 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--green-900);
+  }
+  .section-title .badge {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    background: var(--green-100);
+    color: #2e7d32;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .section-title.teal .left { border-color: var(--teal); }
+  .section-title.teal .left .num { color: var(--teal); }
+  .section-title.teal .badge { background: #e0f2f1; color: #00695c; }
+  .section-title.amber .left { border-color: var(--amber); }
+  .section-title.amber .left .num { color: var(--amber); }
+  .section-title.amber .badge { background: var(--amber-light); color: #e65100; }
+
+  /* ── FORM GRID ── */
+  .grid { display: grid; gap: 10px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .grid-13 { grid-template-columns: 1.4fr 1fr; }
+
+  /* ── FIELD ── */
+  .field {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px 14px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .field:focus-within {
+    border-color: var(--green-500);
+    box-shadow: 0 0 0 3px rgba(0,168,107,.1);
+  }
+  .field label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green-400);
+    margin-bottom: 6px;
+  }
+  .field .hint {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    color: var(--text-main);
+    background: transparent;
+    resize: vertical;
+  }
+  .field textarea { min-height: 72px; line-height: 1.6; }
+  .field select { cursor: pointer; }
+  .field input::placeholder, .field textarea::placeholder { color: #9ab9a0; font-style: italic; }
+
+  /* teal fields */
+  .field.teal { background: #f0fdfa; border-color: #80cbc4; }
+  .field.teal:focus-within { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(38,166,154,.1); }
+  .field.teal label { color: #00838f; }
+
+  /* amber fields */
+  .field.amber { background: #fffde7; border-color: #ffe082; }
+  .field.amber:focus-within { border-color: var(--amber); box-shadow: 0 0 0 3px rgba(249,168,37,.1); }
+  .field.amber label { color: #f57f17; }
+
+  /* highlight financial */
+  .field.financial {
+    background: linear-gradient(135deg, #e65100, #f57f17);
+    border: none;
+  }
+  .field.financial label { color: rgba(255,255,255,.75); }
+  .field.financial input {
+    color: var(--white);
+    font-family: var(--font-serif);
+    font-size: 20px;
+  }
+  .field.financial input::placeholder { color: rgba(255,255,255,.4); }
+
+  /* divider */
+  .divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 22px 0 0;
+  }
+
+  /* ── PRODUTO TABLE ── */
+  .produto-table {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .produto-table-header {
+    display: grid;
+    grid-template-columns: 1.8fr 0.7fr 1.2fr 0.8fr 1fr 28px;
+    gap: 0;
+    background: var(--green-100);
+    padding: 8px 14px;
+  }
+  .produto-table-header span {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #388e3c;
+  }
+  .produto-row {
+    display: grid;
+    grid-template-columns: 1.8fr 0.7fr 1.2fr 0.8fr 1fr 28px;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    padding: 0 14px;
+    align-items: center;
+  }
+  .produto-row input {
+    border: none;
+    outline: none;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--text-main);
+    background: transparent;
+    padding: 8px 4px;
+    width: 100%;
+  }
+  .produto-row input::placeholder { color: #9ab9a0; font-style: italic; }
+  .btn-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ef9a9a;
+    font-size: 14px;
+    padding: 4px;
+    line-height: 1;
+    transition: color .2s;
+  }
+  .btn-remove:hover { color: #e53935; }
+  .btn-add-row {
+    background: none;
+    border: 1px dashed var(--border);
+    border-top: none;
+    width: 100%;
+    padding: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green-400);
+    cursor: pointer;
+    transition: background .2s;
+    border-radius: 0 0 8px 8px;
+  }
+  .btn-add-row:hover { background: var(--green-100); }
+
+  /* ── CHECKBOX GROUP ── */
+  .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .check-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-100);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, transform .1s;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .check-item:hover { background: #d0eeda; border-color: var(--green-400); transform: scale(1.03); }
+  .check-item:active { transform: scale(0.97); }
+  .check-item span {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-family: var(--font-sans);
+    pointer-events: none;
+  }
+  .check-item.active {
+    background: var(--green-500);
+    border-color: var(--green-600);
+    box-shadow: 0 2px 8px rgba(0,168,107,.3);
+  }
+  .check-item.active span { color: var(--white); }
+
+  /* ── SOLUÇÃO MATRIX ── */
+  .matrix-wrap { overflow-x: auto; }
+  .matrix {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .matrix thead tr { background: var(--green-100); }
+  .matrix thead th {
+    padding: 8px 10px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #388e3c;
+    text-align: center;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+  .matrix thead th:first-child { text-align: left; }
+  .matrix tbody tr { border-top: 1px solid var(--border); }
+  .matrix tbody td { padding: 6px 10px; vertical-align: middle; }
+  .matrix tbody td:first-child { font-size: 12px; color: var(--text-main); white-space: nowrap; }
+  .matrix tbody td:not(:first-child) { text-align: center; }
+  .matrix input[type=checkbox] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--green-500); }
+
+  /* ── GENERATE BUTTON ── */
+  .btn-generate {
+    width: 100%;
+    background: linear-gradient(135deg, var(--green-600), var(--green-500));
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 28px;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 20px rgba(0,168,107,.3);
+  }
+  .btn-generate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,168,107,.4);
+  }
+  .btn-generate:active { transform: translateY(0); }
+
+  /* ── RESULT BOX ── */
+  .result-box {
+    display: none;
+    margin-top: 20px;
+    background: var(--green-900);
+    border: 1px solid rgba(0,168,107,.3);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .result-box.visible { display: block; }
+  .result-header {
+    background: rgba(0,168,107,.15);
+    border-bottom: 1px solid rgba(0,168,107,.2);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .result-header p {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green-400);
+  }
+  .result-header .company-name {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    color: var(--white);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .result-url {
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #7fffc4;
+    word-break: break-all;
+    line-height: 1.7;
+    cursor: text;
+    user-select: all;
+  }
+  .result-actions {
+    padding: 0 20px 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn-copy, .btn-whats, .btn-email {
+    flex: 1;
+    min-width: 120px;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .15s;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-copy { background: rgba(0,168,107,.2); color: var(--green-400); border: 1px solid rgba(0,168,107,.3); }
+  .btn-copy:hover { background: rgba(0,168,107,.35); }
+  .btn-whats { background: #25d366; color: white; }
+  .btn-whats:hover { background: #1ebe5d; }
+  .btn-email { background: #4a90d9; color: white; }
+  .btn-email:hover { background: #3a7bc8; }
+  .copied-msg {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--green-400);
+    padding: 6px 20px 0;
+    letter-spacing: 2px;
+  }
+
+  /* ── CLIENT MODE ── */
+  .client-mode-banner {
+    background: linear-gradient(135deg, var(--green-900), #003d2b);
+    border-bottom: 3px solid var(--green-500);
+    padding: 14px 24px;
+    text-align: center;
+  }
+  .client-mode-banner p {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green-400);
+  }
+  .client-mode-banner p span { color: var(--white); }
+
+  .prefilled-card {
+    background: linear-gradient(135deg, #0a1f0f, #0f2d18);
+    border: 1px solid rgba(0,168,107,.2);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin: 24px 0 0;
+  }
+  .prefilled-card p.label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 6px;
+  }
+  .prefilled-card p.company {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .prefilled-card p.meta {
+    font-size: 12px;
+    color: var(--green-300);
+    line-height: 1.7;
+  }
+  .prefilled-card p.meta strong { color: var(--white); }
+
+  /* submit btn */
+  .btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #006644, #00a86b);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 28px;
+    box-shadow: 0 4px 20px rgba(0,168,107,.3);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,168,107,.4); }
+
+  /* urgency block */
+  .urgency-block {
+    margin-top: 20px;
+    background: var(--green-900);
+    border: 1px solid rgba(0,168,107,.25);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .urgency-block .top-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--green-500), var(--teal), var(--green-500));
+  }
+  .urgency-block .inner { padding: 20px 24px; }
+  .urgency-block .inner p.label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 6px;
+  }
+  .urgency-block .inner h3 {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+  .urgency-block .inner p.body {
+    font-size: 13px;
+    color: var(--green-300);
+    line-height: 1.7;
+  }
+  .urgency-block .inner p.body strong { color: var(--white); }
+
+  /* success screen */
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 60px 24px;
+  }
+  .success-screen .icon {
+    width: 64px;
+    height: 64px;
+    background: var(--green-500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 28px;
+  }
+  .success-screen h2 {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--green-900);
+    margin-bottom: 10px;
+  }
+  .success-screen p {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* util */
+  .mt8 { margin-top: 8px; }
+  .mt10 { margin-top: 10px; }
+
+  @media(max-width: 600px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .grid-13 { grid-template-columns: 1fr; }
+    .produto-table-header, .produto-row { grid-template-columns: 1fr 1fr; }
+    .produto-table-header span:nth-child(n+3),
+    .produto-row input:nth-child(n+3) { display: none; }
+    .header-inner { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════
+     HEADER
+════════════════════════════════ -->
+<div class="header">
+  <div class="header-accent"><span></span><span></span><span></span></div>
+  <div class="header-inner">
+    <div class="header-brand">
+      <p class="eyebrow">Diagnóstico Operacional</p>
+      <h1>Envirolyte Brasil</h1>
+      <p class="sub">Tecnologia ECA · Higienização como Processo</p>
+    </div>
+    <div class="mode-badge" id="modeBadge">
+      <p class="label">Modo Ativo</p>
+      <p class="value" id="modeValue">⚙ Equipe</p>
+    </div>
+  </div>
+  <div class="header-strip" id="headerStrip">
+    <p>Preencha os dados do prospect e gere o <strong>link personalizado</strong> para enviar ao cliente.</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════
+     MODO EQUIPE (padrão)
+════════════════════════════════ -->
+<div id="teamMode">
+<div class="container">
+
+  <!-- BLOCO EQUIPE -->
+  <div class="section-title">
+    <div class="left">
+      <p class="num">Dados Internos · Equipe Envirolyte</p>
+      <h2>Informações da Prospecção</h2>
+    </div>
+    <span class="badge">Q01 – Q14</span>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="field">
+      <label>Q01 · Preenchido por</label>
+      <select id="q01">
+        <option value="">Selecione</option>
+        <option>Claudio Rodgers</option>
+        <option>Ezio Giuliani</option>
+        <option>Julio Sena</option>
+        <option>Genivaldo</option>
+        <option>Roberto Zuchetti</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Q02 · Data da Reunião</label>
+      <input type="date" id="q02"/>
+    </div>
+    <div class="field">
+      <label>Q13 · Origem do Lead</label>
+      <select id="q13">
+        <option value="">Selecione</option>
+        <option>Prospecção Técnico/Comercial</option>
+        <option>LinkedIn</option>
+        <option>Prospecção Ativa</option>
+        <option>Marketing</option>
+        <option>Site / Mídias Sociais</option>
+        <option>Feiras / Congressos</option>
+        <option>Outro</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-2 mt10">
+    <div class="field">
+      <label>Q03 · Nome da Empresa *</label>
+      <input type="text" id="q03" placeholder="Ex.: Laticínios Vale Verde Ltda."/>
+    </div>
+    <div class="field">
+      <label>Q04 · CNPJ *</label>
+      <input type="text" id="q04" placeholder="00.000.000/0001-00" maxlength="18" oninput="maskCNPJ(this)"/>
+    </div>
+  </div>
+
+  <div class="grid grid-2 mt10">
+    <div class="field">
+      <label>Q05 · Endereço da Sede</label>
+      <input type="text" id="q05" placeholder="Rua, nº, bairro, cidade, UF"/>
+    </div>
+    <div class="field">
+      <label>Q06 · Local da Produção</label>
+      <input type="text" id="q06" placeholder="Endereço da unidade produtiva"/>
+    </div>
+  </div>
+
+  <div class="grid grid-3 mt10">
+    <div class="field">
+      <label>Q07 · Atividade Principal</label>
+      <input type="text" id="q07" placeholder="Ex.: Laticínios, Frigorífico"/>
+    </div>
+    <div class="field">
+      <label>Q08 · Especialidade</label>
+      <input type="text" id="q08" placeholder="Ex.: UHT, Cortes bovinos"/>
+    </div>
+    <div class="field">
+      <label>Q09 · Porte</label>
+      <select id="q09">
+        <option value="">Selecione</option>
+        <option>Micro</option>
+        <option>Pequena</option>
+        <option>Média</option>
+        <option>Grande</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-3 mt10">
+    <div class="field">
+      <label>Q10 · Faturamento (R$)</label>
+      <input type="text" id="q10" placeholder="Ex.: R$ 5.000.000/ano"/>
+    </div>
+    <div class="field">
+      <label>Q11 · Nº de Funcionários</label>
+      <input type="text" id="q11" placeholder="Ex.: 120"/>
+    </div>
+    <div class="field">
+      <label>Q14 · Detalhe da Origem</label>
+      <input type="text" id="q14" placeholder="Ex.: Contato em feira FISPAL"/>
+    </div>
+  </div>
+
+  <div class="field mt10">
+    <label>Q12 · Envolvidos pelo Prospect</label>
+    <span class="hint">Nome, cargo e e-mail dos stakeholders identificados</span>
+    <textarea id="q12" placeholder="Ex.: João Silva - Dir. Qualidade - joao@empresa.com.br&#10;Maria Costa - Gerente Prod. - maria@empresa.com.br"></textarea>
+  </div>
+
+  <!-- GERAR LINK -->
+  <button class="btn-generate" onclick="generateLink()">
+    &#9654;&nbsp;&nbsp; Gerar Link Personalizado para o Cliente
+  </button>
+
+  <!-- RESULT -->
+  <div class="result-box" id="resultBox">
+    <div class="result-header">
+      <p>Link gerado para</p>
+      <p class="company-name" id="resultCompanyName"></p>
+    </div>
+    <div class="result-url" id="resultUrl"></div>
+    <div class="result-actions">
+      <button class="btn-copy" onclick="copyLink()">&#128203;&nbsp; Copiar Link</button>
+      <a class="btn-whats" id="btnWhats" href="#" target="_blank">&#128172;&nbsp; Enviar WhatsApp</a>
+      <a class="btn-email" id="btnEmail" href="#" >&#9993;&nbsp; Enviar E-mail</a>
+    </div>
+    <p class="copied-msg" id="copiedMsg">&#10003; Link copiado para a área de transferência!</p>
+  </div>
+
+</div><!-- /container -->
+</div><!-- /teamMode -->
+
+
+<!-- ════════════════════════════════
+     MODO CLIENTE
+════════════════════════════════ -->
+<div id="clientMode" style="display:none;">
+
+  <!-- banner -->
+  <div class="client-mode-banner">
+    <p>&#9679; Formulário personalizado &nbsp;|&nbsp; <span>Diagnóstico Operacional Envirolyte Brasil</span></p>
+  </div>
+
+  <div class="container">
+
+    <!-- prefilled card -->
+    <div class="prefilled-card" id="prefilledCard">
+      <p class="label">Diagnóstico preparado para</p>
+      <p class="company" id="clientCompanyName"></p>
+      <p class="meta" id="clientMeta"></p>
+    </div>
+
+    <!-- ── SEÇÃO 1 CLIENTE ── -->
+    <div class="section-title">
+      <div class="left">
+        <p class="num">Seção 01 · Você responde</p>
+        <h2>Identificação e Parceria</h2>
+      </div>
+      <span class="badge">Q15 – Q19</span>
+    </div>
+
+    <div class="field">
+      <label>Q15 · Mapeamento de Gargalos Operacionais *</label>
+      <span class="hint">Quais etapas concentram os maiores desafios de higienização? Marque todos que se aplicam.</span>
+      <div class="check-group" id="q15group">
+        <div class="check-item" data-value="ETA" onclick="toggleCheck(this)"><span>ETA</span></div>
+        <div class="check-item" data-value="Recebimento Matéria-Prima" onclick="toggleCheck(this)"><span>Recebimento MP</span></div>
+        <div class="check-item" data-value="Processamento Matéria-Prima" onclick="toggleCheck(this)"><span>Processamento MP</span></div>
+        <div class="check-item" data-value="Linhas de Produção" onclick="toggleCheck(this)"><span>Linhas de Produção</span></div>
+        <div class="check-item" data-value="Envase" onclick="toggleCheck(this)"><span>Envase</span></div>
+        <div class="check-item" data-value="ETE" onclick="toggleCheck(this)"><span>ETE</span></div>
+      </div>
+    </div>
+
+    <div class="grid grid-2 mt10">
+      <div class="field">
+        <label>Q16 · Interesse em Realizar Teste Técnico? *</label>
+        <span class="hint">A validação prática acelera a aprovação interna.</span>
+        <select id="q16c">
+          <option value="">Selecione</option>
+          <option>Sim — temos interesse</option>
+          <option>Não neste momento</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Q18 · Data Preferencial para o Teste</label>
+        <span class="hint">Quando podemos iniciar?</span>
+        <input type="date" id="q18c"/>
+      </div>
+    </div>
+
+    <div class="field mt10">
+      <label>Q19 · Local da Unidade para o Teste *</label>
+      <span class="hint">Endereço completo onde os testes serão realizados.</span>
+      <input type="text" id="q19c" placeholder="Rua, nº, bairro, cidade, UF, CEP"/>
+    </div>
+
+    <div id="q16motivo" style="display:none;" class="field mt10 amber">
+      <label>Por que não realizará o teste?</label>
+      <textarea id="q16motivoText" placeholder="Descreva o motivo..."></textarea>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- ── SEÇÃO 2 CLIENTE ── -->
+    <div class="section-title teal">
+      <div class="left">
+        <p class="num">Seção 02 · Você responde</p>
+        <h2>Raio-X Operacional</h2>
+      </div>
+      <span class="badge">Q24 – Q29</span>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="field teal">
+        <label>Q24 · Fonte da Água *</label>
+        <span class="hint">Impacta a calibração do equipamento ECA.</span>
+        <select id="q24c">
+          <option value="">Selecione</option>
+          <option>Concessionária pública</option>
+          <option>Poço artesiano / subterrânea</option>
+          <option>Água superficial tratada</option>
+          <option>Reúso tratado</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="field teal">
+        <label>Q26 · Realiza Tratamento de Água?</label>
+        <select id="q26c">
+          <option value="">Selecione</option>
+          <option>Não realiza</option>
+          <option>Sim — filtração</option>
+          <option>Sim — cloração</option>
+          <option>Sim — abrandamento</option>
+          <option>Sim — osmose reversa</option>
+          <option>Sim — UV</option>
+          <option>Múltiplos tratamentos</option>
+        </select>
+      </div>
+      <div class="field teal">
+        <label>Q27 · Possui Laudo de Análise da Água?</label>
+        <span class="hint">Laudo físico-químico e microbiológico recente.</span>
+        <select id="q27c">
+          <option value="">Selecione</option>
+          <option>Sim, possuo e posso compartilhar</option>
+          <option>Sim, possuo mas não tenho em mãos</option>
+          <option>Não possuo</option>
+          <option>Não sei informar</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field teal mt10">
+      <label>Q25 · Detalhes da Fonte Hídrica</label>
+      <span class="hint">Profundidade do poço, fornecedora, particularidades relevantes.</span>
+      <textarea id="q25c" placeholder="Ex.: Poço artesiano com 180m de profundidade, sem tratamento prévio..."></textarea>
+    </div>
+
+    <div class="grid grid-2 mt10">
+      <div class="field teal">
+        <label>Q28 · Vazão (m³/h ou m³/dia)</label>
+        <input type="text" id="q28c" placeholder="Ex.: 12 m³/h"/>
+      </div>
+      <div class="field teal">
+        <label>Q29 · Consumo Diário de Água</label>
+        <input type="text" id="q29c" placeholder="Ex.: 80 m³/dia"/>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- ── SEÇÃO 3 CLIENTE ── -->
+    <div class="section-title amber">
+      <div class="left">
+        <p class="num">Seção 03 · Você responde</p>
+        <h2>Oportunidade de Melhoria e Custos</h2>
+      </div>
+      <span class="badge">Q30 – Q35</span>
+    </div>
+
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:12px;font-style:italic;">
+      Esta seção é onde a maioria das empresas descobre onde está perdendo dinheiro sem saber. Responda com tranquilidade — não há resposta errada.
+    </p>
+
+    <!-- Q30 produtos -->
+    <div style="margin-bottom:4px;">
+      <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#f57f17;">
+        Q30 · Mapeamento de Insumos Químicos Atuais
+      </span>
+      <p style="font-size:10px;color:var(--text-muted);font-style:italic;margin-top:3px;">
+        Informe produto, quantidade, aplicação, diluição e consumo mensal. Esta é a base para calcular seu potencial de redução de TCO.
+      </p>
+    </div>
+    <div class="produto-table">
+      <div class="produto-table-header">
+        <span>Produto / Nome Comercial</span>
+        <span>Qtd</span>
+        <span>Aplicação</span>
+        <span>Diluição</span>
+        <span>Consumo/mês</span>
+        <span></span>
+      </div>
+      <div id="produtoRows">
+        <div class="produto-row">
+          <input type="text" placeholder="Ex.: Soda Cáustica 50%"/>
+          <input type="text" placeholder="Ex.: 200L"/>
+          <input type="text" placeholder="Ex.: CIP tanques"/>
+          <input type="text" placeholder="Ex.: 3%"/>
+          <input type="text" placeholder="Ex.: 5.000L"/>
+          <button class="btn-remove" onclick="removeRow(this)" title="Remover">✕</button>
+        </div>
+        <div class="produto-row">
+          <input type="text" placeholder="Ex.: Hipoclorito de Sódio 12%"/>
+          <input type="text" placeholder="Ex.: 100L"/>
+          <input type="text" placeholder="Ex.: Sanitização superfícies"/>
+          <input type="text" placeholder="Ex.: 200ppm"/>
+          <input type="text" placeholder="Ex.: 1.500L"/>
+          <button class="btn-remove" onclick="removeRow(this)" title="Remover">✕</button>
+        </div>
+      </div>
+      <button class="btn-add-row" onclick="addRow()">+ Adicionar produto</button>
+    </div>
+
+    <div class="grid grid-13 mt10">
+      <div class="field financial">
+        <label>Q31 · Gasto Mensal Total com Químicos (R$)</label>
+        <input type="text" id="q31c" placeholder="Ex.: R$ 28.000,00"/>
+      </div>
+      <div class="field amber">
+        <label>Q32 · Fonte de Energia Elétrica</label>
+        <span class="hint">Parâmetro para dimensionamento do equipamento ECA.</span>
+        <input type="text" id="q32c" placeholder="Ex.: Bifásico 220V / Trifásico 380V"/>
+      </div>
+    </div>
+
+    <!-- Q33 matriz -->
+    <div style="margin:16px 0 6px;">
+      <span style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#f57f17;">
+        Q33 · Onde você gostaria de aplicar as soluções? (opcional)
+      </span>
+      <p style="font-size:10px;color:var(--text-muted);font-style:italic;margin-top:3px;">
+        Marque as etapas e tipos de aplicação de seu interesse. Nossa equipe refinará na visita técnica.
+      </p>
+    </div>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Etapa</th>
+            <th>Anólito</th>
+            <th>Católito</th>
+            <th>FOG</th>
+            <th>CIP</th>
+            <th>COP</th>
+          </tr>
+        </thead>
+        <tbody id="matrixBody">
+          <tr><td>ETA</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+          <tr><td>Receb. Matéria-Prima</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+          <tr><td>Armazen. MP</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+          <tr><td>Armazen. Produção</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+          <tr><td>Produção</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+          <tr><td>Envase</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+          <tr><td>Embalagem</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+          <tr><td>ETE</td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td><td><input type="checkbox"/></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid grid-2 mt10">
+      <div class="field amber">
+        <label>Q34 · Observações Complementares</label>
+        <textarea id="q34c" placeholder="Informações adicionais, restrições, preferências de agendamento..."></textarea>
+      </div>
+      <div class="field">
+        <label>Q35 · Próximo Contato — Data Preferencial *</label>
+        <span class="hint">Comprometimento que guia nossa preparação.</span>
+        <input type="date" id="q35c"/>
+      </div>
+    </div>
+
+    <!-- urgency -->
+    <div class="urgency-block">
+      <div class="top-line"></div>
+      <div class="inner">
+        <p class="label">Próxima Etapa Exclusiva</p>
+        <h3>Seu Relatório de Economia Estimada</h3>
+        <p class="body">
+          Com base nestas respostas, nossa equipe elaborará um relatório exclusivo com
+          <strong>projeção de redução de custos com insumos</strong>,
+          análise de impacto no TCO e indicadores ESG reportáveis.
+          O relatório será entregue presencialmente na visita técnica.
+          Formulários mais completos geram diagnósticos mais precisos.
+        </p>
+      </div>
+    </div>
+
+    <!-- submit -->
+    <button class="btn-submit" onclick="submitForm()">
+      &#9654;&nbsp;&nbsp; Enviar Diagnóstico e Solicitar Visita Técnica
+    </button>
+
+    <!-- success -->
+    <div class="success-screen" id="successScreen">
+      <div class="icon">✓</div>
+      <h2>Diagnóstico Recebido!</h2>
+      <p>Nossa equipe técnica analisará suas respostas e preparará o <strong>Relatório de Economia Estimada</strong> personalizado para a sua empresa. Em breve entraremos em contato para confirmar a visita técnica.</p>
+    </div>
+
+  </div><!-- /container -->
+</div><!-- /clientMode -->
+
+
+<script>
+// ══════════════════════════════════
+// MASK CNPJ
+// ══════════════════════════════════
+function maskCNPJ(el){
+  let v = el.value.replace(/\D/g,'');
+  if(v.length > 14) v = v.slice(0,14);
+  v = v.replace(/^(\d{2})(\d)/,'$1.$2');
+  v = v.replace(/^(\d{2})\.(\d{3})(\d)/,'$1.$2.$3');
+  v = v.replace(/\.(\d{3})(\d)/,'.$1/$2');
+  v = v.replace(/(\d{4})(\d)/,'$1-$2');
+  el.value = v;
+}
+
+// ══════════════════════════════════
+// CHECKBOX TOGGLE
+// ══════════════════════════════════
+function toggleCheck(el){
+  el.classList.toggle('active');
+}
+
+// ══════════════════════════════════
+// PRODUTO TABLE
+// ══════════════════════════════════
+function addRow(){
+  const container = document.getElementById('produtoRows');
+  const row = document.createElement('div');
+  row.className = 'produto-row';
+  row.innerHTML = `
+    <input type="text" placeholder="Produto / Nome Comercial"/>
+    <input type="text" placeholder="Qtd"/>
+    <input type="text" placeholder="Aplicação"/>
+    <input type="text" placeholder="Diluição"/>
+    <input type="text" placeholder="Consumo/mês"/>
+    <button class="btn-remove" onclick="removeRow(this)" title="Remover">✕</button>`;
+  container.appendChild(row);
+}
+function removeRow(btn){ btn.parentElement.remove(); }
+
+// ══════════════════════════════════
+// Q16 TOGGLE MOTIVO
+// ══════════════════════════════════
+document.addEventListener('change', function(e){
+  if(e.target.id === 'q16c'){
+    const motivo = document.getElementById('q16motivo');
+    motivo.style.display = e.target.value.includes('Não') ? 'block' : 'none';
+  }
+});
+
+// ══════════════════════════════════
+// GENERATE LINK (TEAM MODE)
+// ══════════════════════════════════
+function generateLink(){
+  const company = document.getElementById('q03').value.trim();
+  if(!company){ alert('Informe o nome da empresa antes de gerar o link.'); return; }
+
+  const data = {
+    q01: document.getElementById('q01').value,
+    q02: document.getElementById('q02').value,
+    q03: company,
+    q04: document.getElementById('q04').value,
+    q05: document.getElementById('q05').value,
+    q06: document.getElementById('q06').value,
+    q07: document.getElementById('q07').value,
+    q08: document.getElementById('q08').value,
+    q09: document.getElementById('q09').value,
+    q10: document.getElementById('q10').value,
+    q11: document.getElementById('q11').value,
+    q12: document.getElementById('q12').value,
+    q13: document.getElementById('q13').value,
+    q14: document.getElementById('q14').value,
+  };
+
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+  const url = window.location.href.split('#')[0].split('?')[0] + '?c=' + encoded;
+
+  document.getElementById('resultBox').classList.add('visible');
+  document.getElementById('resultCompanyName').textContent = company;
+  document.getElementById('resultUrl').textContent = url;
+
+  const msgWhats = encodeURIComponent(
+    `Olá! Preparamos um diagnóstico personalizado para *${company}*.\n\n` +
+    `Responda as perguntas abaixo para que nossa equipe elabore o seu *Relatório de Economia Estimada* gratuitamente:\n\n${url}\n\n` +
+    `_Leva menos de 5 minutos e o relatório será entregue na nossa visita técnica._`
+  );
+  document.getElementById('btnWhats').href = `https://wa.me/?text=${msgWhats}`;
+
+  const subject = encodeURIComponent(`Diagnóstico Operacional Envirolyte — ${company}`);
+  const body = encodeURIComponent(
+    `Prezado(a),\n\nPreparamos um diagnóstico operacional personalizado para ${company}.\n\n` +
+    `Acesse o link abaixo e responda as perguntas em menos de 5 minutos.\n` +
+    `Com base nas suas respostas, elaboraremos gratuitamente o seu Relatório de Economia Estimada,\n` +
+    `que será entregue presencialmente na visita técnica da Envirolyte Brasil.\n\n${url}\n\n` +
+    `Atenciosamente,\nEquipe Técnica Envirolyte Brasil`
+  );
+  document.getElementById('btnEmail').href = `mailto:?subject=${subject}&body=${body}`;
+
+  document.getElementById('resultBox').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+// ══════════════════════════════════
+// COPY LINK
+// ══════════════════════════════════
+function copyLink(){
+  const url = document.getElementById('resultUrl').textContent;
+  navigator.clipboard.writeText(url).then(()=>{
+    const msg = document.getElementById('copiedMsg');
+    msg.style.display = 'block';
+    setTimeout(()=>{ msg.style.display='none'; }, 2500);
+  });
+}
+
+// ══════════════════════════════════
+// CLIENT SUBMIT
+// ══════════════════════════════════
+function submitForm(){
+  const nextContact = document.getElementById('q35c').value;
+  if(!nextContact){ alert('Por favor, informe a data preferencial de próximo contato (Q35).'); return; }
+
+  // Collect matrix
+  const rows = document.querySelectorAll('#matrixBody tr');
+  const matrixData = [];
+  rows.forEach(row=>{
+    const etapa = row.cells[0].textContent;
+    const checks = row.querySelectorAll('input[type=checkbox]');
+    const labels = ['Anólito','Católito','FOG','CIP','COP'];
+    const selected = [];
+    checks.forEach((c,i)=>{ if(c.checked) selected.push(labels[i]); });
+    if(selected.length) matrixData.push(`${etapa}: ${selected.join(', ')}`);
+  });
+
+  // Collect products
+  const prodRows = document.querySelectorAll('#produtoRows .produto-row');
+  const produtos = [];
+  prodRows.forEach(row=>{
+    const inputs = row.querySelectorAll('input[type=text]');
+    const vals = Array.from(inputs).map(i=>i.value.trim());
+    if(vals[0]) produtos.push(vals.join(' | '));
+  });
+
+  // Collect desafios
+  const desafios = Array.from(document.querySelectorAll('#q15group .check-item.active'))
+    .map(el=>el.dataset.value).join(', ');
+
+  const formData = {
+    q15: desafios || 'Não informado',
+    q16: document.getElementById('q16c').value,
+    q18: document.getElementById('q18c').value,
+    q19: document.getElementById('q19c').value,
+    q24: document.getElementById('q24c').value,
+    q25: document.getElementById('q25c').value,
+    q26: document.getElementById('q26c').value,
+    q27: document.getElementById('q27c').value,
+    q28: document.getElementById('q28c').value,
+    q29: document.getElementById('q29c').value,
+    produtos: produtos.join('\n'),
+    q31: document.getElementById('q31c').value,
+    q32: document.getElementById('q32c').value,
+    q33: matrixData.join(' | '),
+    q34: document.getElementById('q34c').value,
+    q35: nextContact,
+  };
+
+  // Retrieve team data from URL
+  const params = new URLSearchParams(window.location.search);
+  let teamData = {};
+  if(params.get('c')){
+    try{ teamData = JSON.parse(decodeURIComponent(escape(atob(params.get('c'))))); } catch(e){}
+  }
+
+  const all = {...teamData, ...formData};
+
+  // ── Power Automate webhook ──
+  // Substitua a URL abaixo pela URL do seu fluxo Power Automate
+  const WEBHOOK_URL = 'SEU_WEBHOOK_POWER_AUTOMATE_AQUI';
+
+  if(WEBHOOK_URL !== 'SEU_WEBHOOK_POWER_AUTOMATE_AQUI'){
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(all)
+    }).catch(err => console.warn('Webhook error:', err));
+  }
+
+  // Show success
+  document.querySelector('.btn-submit').style.display = 'none';
+  document.querySelector('.urgency-block').style.display = 'none';
+  document.getElementById('successScreen').style.display = 'block';
+  document.getElementById('successScreen').scrollIntoView({behavior:'smooth'});
+}
+
+// ══════════════════════════════════
+// DETECT MODE ON LOAD
+// ══════════════════════════════════
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const encoded = params.get('c');
+  if(!encoded) return;
+
+  let data = {};
+  try{ data = JSON.parse(decodeURIComponent(escape(atob(encoded)))); }
+  catch(e){ return; }
+
+  // Switch to client mode
+  document.getElementById('teamMode').style.display = 'none';
+  document.getElementById('clientMode').style.display = 'block';
+  document.getElementById('modeValue').textContent = '✦ Cliente';
+  document.getElementById('headerStrip').querySelector('p').innerHTML =
+    'Preencha as informações abaixo para receber o seu <strong>Relatório de Economia Estimada</strong> gratuitamente.';
+
+  // Fill prefilled card
+  document.getElementById('clientCompanyName').textContent = data.q03 || '';
+  const meta = [];
+  if(data.q04) meta.push(`CNPJ: <strong>${data.q04}</strong>`);
+  if(data.q07) meta.push(`Atividade: <strong>${data.q07}</strong>`);
+  if(data.q06) meta.push(`Local da produção: <strong>${data.q06}</strong>`);
+  if(data.q01) meta.push(`Responsável Envirolyte: <strong>${data.q01}</strong>`);
+  if(data.q02) meta.push(`Data da reunião: <strong>${data.q02}</strong>`);
+  document.getElementById('clientMeta').innerHTML = meta.join('&nbsp;&nbsp;·&nbsp;&nbsp;');
+})();
+</script>
+
+</body>
+</html>
